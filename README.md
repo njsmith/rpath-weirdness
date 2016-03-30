@@ -7,3 +7,9 @@ Usage:
 $ ./build.sh
 $ LD_DEBUG=libs,scopes ./main
 ```
+
+To demonstrate a workaround using `patchelf`:
+```
+$ ./build.sh --workaround
+$ LD_DEBUG=libs,scopes ./main
+```
