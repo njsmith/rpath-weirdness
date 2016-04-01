@@ -11,8 +11,9 @@ gcc -fPIC -shared lib.c -lncurses -o B.so
 
 if [ "x$1" = "x--workaround" ]; then
     mv ./libncurses.so.5 ./libncurses-asdf.so.5
-    # This requires patchelf 0.9, which is not yet in Debian
-    # Can install from https://github.com/NixOS/patchelf
-    patchelf --set-soname libncurse-asdf.so.5 libncurses-asdf.so.5
-    patchelf --replace-needed libncurses.so.5 libncurses-asdf.so.5 ./A.so
+    # This requires a patchelf containing a fix for
+    #   https://github.com/NixOS/patchelf/issues/84
+    # e.g., https://github.com/njsmith/patchelf
+    patchelf --debug --set-soname libncurse-asdf.so.5 libncurses-asdf.so.5
+    patchelf --debug --replace-needed libncurses.so.5 libncurses-asdf.so.5 ./A.so
 fi
